@@ -121,7 +121,7 @@ void check(unsigned char* contents, unsigned int size, struct Checks cs) {
 	}
 }
 
-struct Checks checkFile(MS41File *f) {
+struct Checks checkFile(struct MS41File *f) {
 
 	struct Checks cs;
 	cs.num = 0;
@@ -148,14 +148,14 @@ struct Checks checkFile(MS41File *f) {
 		cs.num++;
 	}
 
-	cs.start = (Check *)malloc(sizeof(struct Check) * cs.num);
+	cs.start = (struct Check *)malloc(sizeof(struct Check) * cs.num);
 
 	check(contents, size, cs);
 
 	return cs;	
 }
 
-int LoadFile( MS41File *f, char *path )
+int LoadFile( struct MS41File *f, char *path )
 {
 	FILE *fp = fopen( path, "rb" );
 	if( fp == NULL ) {
@@ -186,7 +186,7 @@ void main(int argc, char* argv[]) {
 		return;
 	}
 
-	MS41File file;
+	struct MS41File file;
 
 	char* inpath = argv[1];
 	char* outpath = argv[2];
